@@ -1,0 +1,26 @@
+{
+    "name": "i.see.u",
+    "version": "0.0.1",
+    "description": "Plugin for validating bundleIdentifier",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --reporter spec"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gojecks/i.see.u.git"
+    },
+    "keywords": [
+        "IPAPatch"
+    ],
+    "author": "Gojecks Joseph",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/gojecks/i.see.u/issues"
+    },
+    "homepage": "https://github.com/gojecks/i.see.u#readme",
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^6.2.1"
+    }
+}
