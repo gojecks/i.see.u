@@ -65,7 +65,7 @@
 
     HideMyAss.prototype.showMessage = writeMessage;
 
-    function writeMessage() {
+    function writeMessage(message) {
         var defaultMessage = "/***************************** I SEE U!! *******************************/";
         defaultMessage += "HAHAHAHAHA GOTCHA";
         document.body.style.background = "#000000";
