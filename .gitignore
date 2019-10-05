@@ -1,5 +1,5 @@
 node_modules
 npm-debug.log
-tmp/result.js
+test/result.js
 package-lock.json
 *.tgz

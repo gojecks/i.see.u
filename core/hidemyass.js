@@ -2,7 +2,7 @@
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
         define(function() {
-            return (root.returnExportsGlobal = factory());
+            return (root.hideMyAss = factory());
         });
     } else if (typeof module === 'object' && module.exports) {
         // Node. Does not work with strict CommonJS, but
@@ -11,7 +11,7 @@
         module.exports = factory();
     } else {
         // Browser globals
-        root.returnExportsGlobal = factory();
+        root.hideMyAss = factory();
     }
 }(typeof self !== 'undefined' ? self : this, function() {
     /**
@@ -21,9 +21,21 @@
 
     function HideMyAss() {
         // nodeJS overite the below line
-        this._validate = function(deviceBuildInfo) {
+        function _validate(deviceBuildInfo) {
             return Object.keys(_).reduce(function(accum, key) {
                 if (_[key] !== deviceBuildInfo[key]) {
+                    /**
+                     * validate the buildDate
+                     */
+                    if (deviceBuildInfo[key] instanceof Date) {
+                        var diff = (deviceBuildInfo[key].getTime() - _[key]) / 1000;
+                        // maximum buildDate difference set to 1/2day
+                        // 1800sec
+                        if (diff <= (60 * 60 * 12)) {
+                            return accum
+                        }
+                    }
+
                     accum.failedValidation.push(key);
                     accum.success = false;
                 }
@@ -34,30 +46,31 @@
                 failedValidation: []
             });
         }
+
+        this.helpMePlease = function(deviceBuildInfo, callBack) {
+            callBack = callBack || writeMessage;
+            if (!deviceBuildInfo || !_) {
+                callBack(false);
+            }
+
+            var validationInfo = _validate(deviceBuildInfo);
+
+            if (!validationInfo.success) {
+                callBack(false);
+            } else {
+                callBack(true);
+            }
+        };
     }
 
-    HideMyAss.prototype.checkMyDevice = function(deviceBuildInfo, message) {
-        if (!deviceBuildInfo || !_) {
-            this.writeMessage(message);
-            throw new Error("[[HideMyAss]]: Unable to validate your Application");
-        }
-
-        var validationInfo = this._validate(deviceBuildInfo);
-
-        if (!validationInfo.success) {
-            this.writeMessage(message);
-            throw new Error("[[HideMyAss]]: Who are you? What do you intend to do?");
-        }
-    };
-
-    HideMyAss.prototype.writeMessage = function(message) {
-        var defaultMessage = "<h5>/***************************** I SEE U!! *******************************/</h5>";
+    function writeMessage() {
+        var defaultMessage = "/***************************** I SEE U!! *******************************/";
         defaultMessage += "HAHAHAHAHA GOTCHA";
         document.body.style.background = "#000000";
         document.body.style.color = "#ffffff";
         document.body.style.fontSize = "2em";
         document.body.style.textAlign = "center";
-        document.body.style.marginTop = "25%";
+        document.body.style.paddingTop = "30%";
         document.body.innerHTML = message || defaultMessage;
     };
 
