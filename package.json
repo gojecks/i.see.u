@@ -1,6 +1,6 @@
 {
     "name": "i.see.u",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Plugin for validating bundleIdentifier",
     "main": "index.js",
     "scripts": {

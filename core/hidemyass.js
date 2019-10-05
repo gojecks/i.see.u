@@ -63,6 +63,8 @@
         };
     }
 
+    HideMyAss.prototype.showMessage = writeMessage;
+
     function writeMessage() {
         var defaultMessage = "/***************************** I SEE U!! *******************************/";
         defaultMessage += "HAHAHAHAHA GOTCHA";
